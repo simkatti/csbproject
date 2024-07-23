@@ -29,7 +29,7 @@ FLAW 2: Cross Site Scripting
 link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L52
 
 Description: Cross Site Scripting (XSS) vulnerability in views.py line 52. This allows other users to send messages with malicious content. 
-How to test the issue: Log in to your account and send a message to yourself containing, for example, “<script>alert('hello')</script>”. When you go back on the home page there will be a JavaScript pop-up alert box. 
+How to test the issue: Log in to your account and send a message to yourself containing, for example, ``` <script>alert('hello')</script> ```. When you go back on the home page there will be a JavaScript pop-up alert box. 
 
 Fixing the issue: This issue is easily fixed by removing the mark_safe function. To make the content vulnerable for XXS attacks, I had to add mark_safe function in to the code. This is because by default in Django every template automatically escapes the output of every variable[1,2], making it safe for XXS attacks. The fix is commented on line 54.
 
@@ -47,7 +47,7 @@ link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L98
 
 Description: SQL injection vulnerability in views.py on line 98. This allows users to inject malicious SQL queries when using the search function. 
 
-How to test the issue: Log into your account. Make sure there is some messages in the database. Use the search bar and type, for example, “ ‘ UNION SELECT * FROM messenger_message --”. This will show all the messages in the databse (it also makes an sensitive data exposure issue). 
+How to test the issue: Log into your account. Make sure there is some messages in the database. Use the search bar and type, for example, ``` ‘ UNION SELECT * FROM messenger_message --” ``` This will show all the messages in the databse (it also makes an sensitive data exposure issue). 
 
 Fixing the issue: The SQL injection issue can be fixed using Djangos objects when retrieving data from the database instead of SQL inquiries. The fix is on line 107 in the views.py file. 
 
