@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <head>
+        <title>Home</title>
+    </head>
+
+
+    <body>
+
+        <table>
+		<tr>
+		<h2>Hello, {{user.username}} </h2>
+		</table>
+
+        <div class="w3-bar">
+        <form action="{% url 'logout' %}" method="POST">
+			{% csrf_token %}
+            <input type="submit" value="Logout"/>
+        </form>
+        <br>
+        <form action="{% url 'newmessage' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Send a message"/>
+        </form>
+        </div>
+		
+        <h3> Your inbox</h3> 
+        <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}          
+            <input type="text" id="query" name="query">
+            <button type="submit">Search</button>
+
+        </form>
+        <table>
+            {% if msgs %}
+            <ul>
+                {% for message in msgs %}
+                        
+                        <strong>From: </strong> {{ message.sender }}<br> 
+                        {{ message.content }}<br>
+                        {{ message.time }} <br>
+                        <br>
+                        <form action="{% url 'delete' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ message.id }}" />
+                            <input type="submit" value="Delete"/> <br>
+                        </form>
+                        <br>
+                    
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No messages found.</p>
+        {% endif %}
+        </table>
+
+		</table>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <head>
+        <title>New message</title>
+    </head>
+    <body>
+	<h2>Hello, {{user.username}} </h2>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    </div>
+    <form method="post" action="{% url 'newmessage' %}">
+        {% csrf_token %}
+        <label for="reciever">To:</label><br>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="content">Message:</label><br>
+        <textarea id="content" name="content" rows="10"></textarea><br><br>  
+        <button type="submit">Send</button><br>
+    </form>
+    <br>
+    <a href="/home">Go back</a> 
+
+</html>
