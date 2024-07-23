@@ -7,9 +7,13 @@ The app contains 6 security flaws from OWASP Top Ten 2017 list. The flaws are in
 
 Installation instructions: 
 Clone the git repo to a folder of your choice. 
+
 Write a secret key in .env file or navigate to settings.py and change the secret key there. The application assumes your secret key is in .env file. 
+
 Run migrations: ```python3 manage.py migrate```
+
 Run the app: ```python3 manage.py runserver```
+
 The database doesn’t have any users, so you start the testing by creating an account. 
 
 FLAW 1: Broken Access Control
