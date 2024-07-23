@@ -14,11 +14,13 @@ link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L65
 Description: Broken Access Control in deleteView function in views.py file. The deleteView function doesn’t authenticate the user before deleting the message, so that only the message reciever can delete it. This means that anyone who knows the message id or iterates through them can delete the message.
 How to test the issue: Test the app and send messages to other users you have created or yourself. Find the message id from the browsers inspection tools. Log in as another user. Send a message to yourself and change the message id in the inspections tools, to the other users message id. Delete other users message by pressing the delete button. The user who is currently logged in should still see their own message. 
 Fixing the issue: This issue is fixed with requesting the user and making sure that the users id matches the message id and only then the message can be deleted. The fix is commented out on lines 65, 66 and 68. 
+
 FLAW 2: Cross Site Scripting
 link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L52
 Description: Cross Site Scripting (XSS) vulnerability in views.py line 52. This allows other users to send messages with malicious content. 
 How to test the issue: Log in to your account and send a message to yourself containing, for example, “<script>alert('hello')</script>”. When you go back on the home page there will be a JavaScript pop-up alert box. 
 Fixing the issue: This issue is easily fixed by removing the mark_safe function. To make the content vulnerable for XXS attacks, I had to add mark_safe function in to the code. This is because by default in Django every template automatically escapes the output of every variable[1,2], making it safe for XXS attacks. The fix is commented on line 54.
+
 FLAW 3: Sensitive Data Exposure
 link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L47
 Description: There is a risk of sensitive data exposure in the homePage function in views.py file. All user received private messages are displayed on the homepage after the user has logged in. If the user logs out and goes back via the browsers back button, all the messages are there on display even if user is logged out. This happens because the messages are cached by the browser. 
