@@ -47,7 +47,7 @@ link: https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L98
 
 Description: SQL injection vulnerability in views.py on line 98. This allows users to inject malicious SQL queries when using the search function. 
 
-How to test the issue: Log into your account. Make sure there is some messages in the database. Use the search bar and type, for example, ``` ‘ UNION SELECT * FROM messenger_message --” ``` This will show all the messages in the databse (it also makes an sensitive data exposure issue). 
+How to test the issue: Log into your account. Make sure there is some messages in the database. Use the search bar and type, for example, ``` ‘ UNION SELECT * FROM messenger_message -- ``` This will show all the messages in the databse (it also makes an sensitive data exposure issue). 
 
 Fixing the issue: The SQL injection issue can be fixed using Djangos objects when retrieving data from the database instead of SQL inquiries. The fix is on line 107 in the views.py file. 
 
