@@ -68,7 +68,7 @@ Description: homePage function is made vulnerable for CSRF attacks by using the 
 
 Fixing the issue: Simply remove csrf_extempt on line 48 in views.py
 
-Sources: 
+#### Sources
 
 [Django documentation](https://docs.djangoproject.com/en/5.0/topics/security/)
 
