@@ -4,16 +4,20 @@ This is a final course project for Helsinki University Cyber Security Base 1. Th
 
 The app contains 6 security flaws from OWASP Top Ten 2017 list. The flaws are installed into the code and the fixes are commented out. This application can be run locally but with the security flaws it is very vulnerable. 
 
-Installation instructions: 
-Clone the git repo to a folder of your choice. 
+## Installation instructions
+`git clone git@github.com:simkatti/csbproject.git`
 
-Write a secret key in .env file or navigate to settings.py and change the secret key there. The application assumes your secret key is in .env file. 
+`cd csbproject`
 
-Run migrations: ```python3 manage.py migrate```
+`touch .env` write the secret key in the .env file: SECRET_KEY = 'WRITE-YOUR-KEY-HERE'
 
-Run the app: ```python3 manage.py runserver```
+```python3 manage.py migrate``` (make sure you have django installed if not `pip install django`)
+
+ ```python3 manage.py runserver``` to run the app
 
 The database doesn’t have any users, so you start the testing by creating an account. 
+
+## The security flaws
 
 ### FLAW 1: Broken Access Control
 [Broken Acess Control in views.py on line 65](https://github.com/simkatti/csbproject/blob/main/messenger/views.py#L65)
